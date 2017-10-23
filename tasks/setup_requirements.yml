@@ -4,7 +4,7 @@
   setup:
 
 - name: Install libselinux-python package for 'copy' task
-  package:
+  yum:
     name: libselinux-python
     state: present
   when: ansible_os_family == "RedHat"
