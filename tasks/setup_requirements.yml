@@ -1,5 +1,4 @@
 ---
-
 - name: Gather facts
   setup:
 
@@ -7,4 +6,14 @@
   yum:
     name: libselinux-python
     state: present
-  when: ansible_os_family == "RedHat"
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distibution_version|float < 8.0
+
+- name: Install python3-libselinux package for 'copy' task
+  yum:
+    name: python3-libselinux
+    state: present
+  when:
+    - ansible_os_family == "RedHat"
+    - ansible_distibution_version|float >= 8.0
